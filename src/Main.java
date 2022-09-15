@@ -8,10 +8,9 @@ public class Main {
         char occursTheMost = '!'; //ввели произвольно самый часто встречающийся символ
         int maxCount = 0; //макс кол
         int minCount = 0; //мин кол
-        boolean d = Character.isLetter(occursTheMost);
+        boolean m = Character.isLetter(newText.text.length()); //проверка введенного символа является ли буквой
 
-        if (d == true) {
-            //находим нужный символ, кот нужно искать
+        if (m == true) {  //проверка текста из метода ниже
             for (int i = 0; i < input.length(); i++) {
                 char c = input.charAt(i);
                 if (map.containsKey(c)) { //если он содержится в нашей мапе - увеличиваем его количество
@@ -48,6 +47,7 @@ public class Main {
             }
 
             System.out.println(occursTheMost + " " + wordCount);
+
         } else {
             System.out.println("Переданный символ не является буквой");
         }
