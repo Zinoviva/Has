@@ -1,65 +1,45 @@
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Map<Character, Integer> map = new HashMap();
-        String input = newText.text.toUpperCase(); //переводим весь текст в верхний регистр
-        char occursTheMost = '!'; //ввели произвольно самый часто встречающийся символ
-        int maxCount = 0; //макс кол
-        int minCount = 0; //мин кол
-        boolean m = Character.isLetter(newText.text.length()); //проверка введенного символа является ли буквой
+        Map<Character, Integer> map = new HashMap<>();
 
-        if (m == true) {  //проверка текста из метода ниже
-            for (int i = 0; i < input.length(); i++) {
-                char c = input.charAt(i);
-                if (map.containsKey(c)) { //если он содержится в нашей мапе - увеличиваем его количество
-                    map.put(c, map.get(c) + 1);
-                }
-                //проверяем максимальное количество и устанaвливаем соответствующие значения
-                if (map.containsKey(c) && map.get(c) > maxCount) {
-                    //occursTheMost = c;
-                    maxCount = map.get(c);
-                }
-                //проверяем минимальное количество и устанaвливаем соответствующие значения
-                if (map.containsKey(c) && map.get(c) < minCount) {
-                    //occursTheMost = c;
-                    maxCount = map.get(c);
-                }
+        for (char symbolText : newText.text.toCharArray()) {  //проверка, что буква является символом
+            if (Character.isLetter(symbolText)) {
+                if (!map.containsKey(symbolText))
+                    map.put(symbolText, 1);
+                else
+                    map.put(symbolText, map.get(symbolText) + 1);
             }
-            //разделяем строку на слова и ищем символ, который содержатся в тексте
-            String[] words = input.split(" ");  //ищем разделитель по пробелу и делаем массив
-            int wordCount = 0;
-            CharSequence charSequence;
-            for (Character character : map.keySet()) {
-                int tempCount = 0;
-                charSequence = "" + character;
-                for (int i = 0; i < words.length; i++) {
-                    if (words[i].contains(charSequence)) {
-                        tempCount++;
-                    }
-                }
+        }
 
-                if (tempCount > wordCount) {
-                    occursTheMost = character;
-                    wordCount = tempCount;
-                }
+        int maxAmount = (Collections.max(map.values()));   //максимальное значение
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == maxAmount) {
+                System.out.println("Максимальное значение" + entry.getKey());
             }
-
-            System.out.println(occursTheMost + " " + wordCount);
-
-        } else {
-            System.out.println("Переданный символ не является буквой");
+        }
+        int minAmount = (Collections.min(map.values()));    //минимальное значение
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == minAmount || entry.getValue() == null) {
+                System.out.println("Минимальное значение " + entry.getKey());
+                break;
+            }
         }
     }
-
-    public static class newText {  // статическое текстовое поле
+    public static class newText {  // статическое текстовое поле условие
         static String text;
 
         static {
-            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed" +
+                    " do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad " +
+                    "minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo " +
+                    "consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore" +
+                    " eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa " +
+                    "qui officia deserunt mollit anim id est laborum.";
         }
-
     }
 }
 
